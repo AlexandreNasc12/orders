@@ -80,4 +80,16 @@ public class OrderTest
         _order.UpdateHeader(null!, null!);
         Assert.False(_order.IsValid);
     }
+
+    [Fact(DisplayName = "Should ignore adding an item if the order is not pending")]
+    public void T10()
+    {
+        // Force order status to completed via reflection
+        typeof(Order).GetProperty(nameof(Order.OrderStatus))?.SetValue(_order, OrderStatus.Completed);
+        
+        _order.AddItem(new OrderItem(new Product(Guid.NewGuid(), "Product Test"), 2.0, 1.99m, 1.0m));
+        
+        Assert.Empty(_order.Items);
+        Assert.Equal(0, _order.Total);
+    }
 }

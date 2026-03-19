@@ -24,6 +24,14 @@ public sealed class OrderRepository : IOrderRepository
         return await _context.Orders.Include(o => o.Items).FirstOrDefaultAsync(x => x.Id == id);
     }
 
+    public async Task<IEnumerable<Order>> GetByStatusAsync(Sales.Orders.Domain.Enums.OrderStatus status)
+    {
+        return await _context.Orders
+            .Include(o => o.Items)
+            .Where(x => x.OrderStatus == status)
+            .ToListAsync();
+    }
+
     public void Update(Order entity)
     {
         _context.Orders.Update(entity);
