@@ -114,7 +114,8 @@ Tecnologia utilizada:
 
 Contém:
 
-* Testes unitários
+* Testes unitários do Domínio (Regras de Negócio)
+* Testes unitários da camada de Aplicação (Handlers e Queries) utilizando **NSubstitute** para mock de dependências.
 * Testes de integração
 
 ---
@@ -223,11 +224,9 @@ A arquitetura facilita a criação de testes:
 
 ---
 
-# 4. Necessidade de Criação de Endpoints
+# 4. Endpoints da API
 
-Atualmente o `OrderController` possui apenas um endpoint de teste.
-
-Para completar a API, os seguintes **endpoints REST** precisam ser implementados.
+A aplicação possui os seguintes **endpoints REST** implementados e funcionais, orquestrados via MediatR:
 
 ---
 
